@@ -1,21 +1,9 @@
-// Homework — Task 2: extend emailCases and/or phoneCases below to at
-// least 8 cases each (your mentor may ask for just one of the two
-// functions), then implement validate.go until every subtest passes.
-//
-// Like todo_test.go, this file uses t.Run per case and t.Errorf (not
-// t.Fatalf) for the actual assertions, so one wrong case never hides
-// the others. Run `go test -v ./validate/...` and read every FAIL line.
 package validate
 
 import "testing"
 
 const minCases = 8
 
-// emailCases is the table of test cases for ValidateEmail.
-//
-// TODO: add at least 5 more cases here — for example: whitespace inside
-// the address, a missing domain, a trailing dot, consecutive dots, a
-// very long local part, or a unicode character.
 var emailCases = []struct {
 	name  string
 	input string
@@ -24,8 +12,12 @@ var emailCases = []struct {
 	{"valid simple", "student@softserve.academy", true},
 	{"missing at sign", "student-softserve.academy", false},
 	{"empty string", "", false},
-
-	// TODO: add at least 5 more cases here.
+	{"whitespace inside", "student @softserve.academy", false},
+	{"missing domain", "student@", false},
+	{"trailing dot", "student@softserve.academy.", false},
+	{"consecutive dots", "student@softserve..academy", false},
+	{"unicode local", "студ@softserve.academy", false},
+	{"long local still valid", "averylonglocalpartstillok@softserve.academy", true},
 }
 
 func TestValidateEmail(t *testing.T) {
@@ -47,13 +39,6 @@ func TestValidateEmail(t *testing.T) {
 	}
 }
 
-// phoneCases is the table of test cases for ValidatePhone.
-// This is only required if your mentor asked you to validate phone
-// numbers instead of (or in addition to) email addresses.
-//
-// TODO: add at least 5 more cases here — for example: missing digits,
-// letters mixed in, an unexpected country code format, or extra
-// separators like spaces, dots or parentheses.
 var phoneCases = []struct {
 	name  string
 	input string
@@ -62,8 +47,11 @@ var phoneCases = []struct {
 	{"valid with plus", "+380501234567", true},
 	{"contains letters", "050-abc-4567", false},
 	{"empty string", "", false},
-
-	// TODO: add at least 5 more cases here.
+	{"valid with dashes", "050-123-4567", true},
+	{"too short", "12345", false},
+	{"spaces", "050 123 4567", false},
+	{"parentheses", "(050)1234567", false},
+	{"plus only", "+", false},
 }
 
 func TestValidatePhone(t *testing.T) {

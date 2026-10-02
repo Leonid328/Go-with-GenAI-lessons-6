@@ -1,0 +1,103 @@
+?   	lesson6-homework/cmd/configdemo	[no test files]
+=== RUN   TestLoadConfig
+=== RUN   TestLoadConfig/successful_read
+=== RUN   TestLoadConfig/file_not_found
+=== RUN   TestLoadConfig/corrupted_JSON
+--- PASS: TestLoadConfig (0.00s)
+    --- PASS: TestLoadConfig/successful_read (0.00s)
+    --- PASS: TestLoadConfig/file_not_found (0.00s)
+    --- PASS: TestLoadConfig/corrupted_JSON (0.00s)
+=== RUN   TestSaveConfig_OmitsSecretsAndEmptyURL
+--- PASS: TestSaveConfig_OmitsSecretsAndEmptyURL (0.00s)
+=== RUN   TestValidateConfig
+=== RUN   TestValidateConfig/ok_production_8080
+=== RUN   TestValidateConfig/min_port_1024
+=== RUN   TestValidateConfig/max_port_65535
+=== RUN   TestValidateConfig/port_0
+=== RUN   TestValidateConfig/port_80
+=== RUN   TestValidateConfig/port_99999
+=== RUN   TestValidateConfig/empty_env
+=== RUN   TestValidateConfig/weird_env
+--- PASS: TestValidateConfig (0.00s)
+    --- PASS: TestValidateConfig/ok_production_8080 (0.00s)
+    --- PASS: TestValidateConfig/min_port_1024 (0.00s)
+    --- PASS: TestValidateConfig/max_port_65535 (0.00s)
+    --- PASS: TestValidateConfig/port_0 (0.00s)
+    --- PASS: TestValidateConfig/port_80 (0.00s)
+    --- PASS: TestValidateConfig/port_99999 (0.00s)
+    --- PASS: TestValidateConfig/empty_env (0.00s)
+    --- PASS: TestValidateConfig/weird_env (0.00s)
+=== RUN   TestSaveConfig_WrapsDiskErrors
+--- PASS: TestSaveConfig_WrapsDiskErrors (0.00s)
+=== RUN   TestLoadConfig_WrapsDiskFull
+--- PASS: TestLoadConfig_WrapsDiskFull (0.00s)
+PASS
+ok  	lesson6-homework/config	0.243s
+=== RUN   TestSaveAndLoadTodos_RoundTrip
+=== RUN   TestSaveAndLoadTodos_RoundTrip/Write_tests
+=== RUN   TestSaveAndLoadTodos_RoundTrip/Ship_feature
+--- PASS: TestSaveAndLoadTodos_RoundTrip (0.00s)
+    --- PASS: TestSaveAndLoadTodos_RoundTrip/Write_tests (0.00s)
+    --- PASS: TestSaveAndLoadTodos_RoundTrip/Ship_feature (0.00s)
+=== RUN   TestSaveAndLoadTodos_TableDriven
+=== RUN   TestSaveAndLoadTodos_TableDriven/single_item
+=== RUN   TestSaveAndLoadTodos_TableDriven/multiple_items
+=== RUN   TestSaveAndLoadTodos_TableDriven/empty_list
+=== RUN   TestSaveAndLoadTodos_TableDriven/nil_list
+--- PASS: TestSaveAndLoadTodos_TableDriven (0.00s)
+    --- PASS: TestSaveAndLoadTodos_TableDriven/single_item (0.00s)
+    --- PASS: TestSaveAndLoadTodos_TableDriven/multiple_items (0.00s)
+    --- PASS: TestSaveAndLoadTodos_TableDriven/empty_list (0.00s)
+    --- PASS: TestSaveAndLoadTodos_TableDriven/nil_list (0.00s)
+=== RUN   TestSaveTodos_CreatesFile
+--- PASS: TestSaveTodos_CreatesFile (0.00s)
+=== RUN   TestSaveTodos_OverwritesExistingFile
+--- PASS: TestSaveTodos_OverwritesExistingFile (0.00s)
+=== RUN   TestLoadTodos_MissingFile
+--- PASS: TestLoadTodos_MissingFile (0.00s)
+=== RUN   TestLoadTodos_MalformedJSON
+--- PASS: TestLoadTodos_MalformedJSON (0.00s)
+=== RUN   TestLoadTodos_EmptyFile
+--- PASS: TestLoadTodos_EmptyFile (0.00s)
+PASS
+ok  	lesson6-homework/todo	0.143s
+=== RUN   TestValidateEmail
+=== RUN   TestValidateEmail/valid_simple
+=== RUN   TestValidateEmail/missing_at_sign
+=== RUN   TestValidateEmail/empty_string
+=== RUN   TestValidateEmail/whitespace_inside
+=== RUN   TestValidateEmail/missing_domain
+=== RUN   TestValidateEmail/trailing_dot
+=== RUN   TestValidateEmail/consecutive_dots
+=== RUN   TestValidateEmail/unicode_local
+=== RUN   TestValidateEmail/long_local_still_valid
+--- PASS: TestValidateEmail (0.00s)
+    --- PASS: TestValidateEmail/valid_simple (0.00s)
+    --- PASS: TestValidateEmail/missing_at_sign (0.00s)
+    --- PASS: TestValidateEmail/empty_string (0.00s)
+    --- PASS: TestValidateEmail/whitespace_inside (0.00s)
+    --- PASS: TestValidateEmail/missing_domain (0.00s)
+    --- PASS: TestValidateEmail/trailing_dot (0.00s)
+    --- PASS: TestValidateEmail/consecutive_dots (0.00s)
+    --- PASS: TestValidateEmail/unicode_local (0.00s)
+    --- PASS: TestValidateEmail/long_local_still_valid (0.00s)
+=== RUN   TestValidatePhone
+=== RUN   TestValidatePhone/valid_with_plus
+=== RUN   TestValidatePhone/contains_letters
+=== RUN   TestValidatePhone/empty_string
+=== RUN   TestValidatePhone/valid_with_dashes
+=== RUN   TestValidatePhone/too_short
+=== RUN   TestValidatePhone/spaces
+=== RUN   TestValidatePhone/parentheses
+=== RUN   TestValidatePhone/plus_only
+--- PASS: TestValidatePhone (0.00s)
+    --- PASS: TestValidatePhone/valid_with_plus (0.00s)
+    --- PASS: TestValidatePhone/contains_letters (0.00s)
+    --- PASS: TestValidatePhone/empty_string (0.00s)
+    --- PASS: TestValidatePhone/valid_with_dashes (0.00s)
+    --- PASS: TestValidatePhone/too_short (0.00s)
+    --- PASS: TestValidatePhone/spaces (0.00s)
+    --- PASS: TestValidatePhone/parentheses (0.00s)
+    --- PASS: TestValidatePhone/plus_only (0.00s)
+PASS
+ok  	lesson6-homework/validate	0.342s

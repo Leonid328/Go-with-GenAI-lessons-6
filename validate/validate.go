@@ -1,34 +1,60 @@
-// Package validate provides simple syntactic validators for common
-// user-input formats.
-//
-// Homework — Task 2 (Lesson 6: File I/O, JSON and Testing):
-// Implement ValidateEmail and/or ValidatePhone below (your mentor may
-// ask for just one) and extend the test tables in validate_test.go to
-// at least 8 cases each, including edge cases.
 package validate
 
-// ValidateEmail reports whether s is a syntactically valid email address.
-//
-// TODO: implement this function. At minimum it should:
-//   - reject the empty string,
-//   - require exactly one "@" with a non-empty local part and domain part,
-//   - reject values containing whitespace.
-//
-// Document any additional decisions you make (e.g. how you handle a
-// trailing dot, consecutive dots, or unicode characters) in a comment
-// here, and add matching test cases in validate_test.go.
+import "strings"
+
+// ValidateEmail: empty is false, exactly one @, local and domain not empty,
+// no whitespace. I also reject trailing/leading dots in the domain,
+// consecutive dots, and any non-ascii rune.
 func ValidateEmail(s string) bool {
-	// TODO: implement me
-	return false
+	if s == "" || strings.ContainsAny(s, " \t\n\r") {
+		return false
+	}
+	for _, r := range s {
+		if r > 127 {
+			return false
+		}
+	}
+	if strings.Count(s, "@") != 1 {
+		return false
+	}
+	local, domain, _ := strings.Cut(s, "@")
+	if local == "" || domain == "" {
+		return false
+	}
+	if strings.Contains(local, "..") || strings.Contains(domain, "..") {
+		return false
+	}
+	if strings.HasPrefix(domain, ".") || strings.HasSuffix(domain, ".") {
+		return false
+	}
+	if !strings.Contains(domain, ".") {
+		return false
+	}
+	return true
 }
 
-// ValidatePhone reports whether s is a syntactically valid phone number.
-//
-// TODO: implement this function. Decide which format(s) you accept
-// (e.g. "+380501234567", "050-123-4567") and document your decision
-// here. At minimum it should reject the empty string and any value
-// containing letters.
+// ValidatePhone: "+" then digits, or digits with optional dashes.
+// No letters, no spaces, no parentheses. 10 to 15 digits.
 func ValidatePhone(s string) bool {
-	// TODO: implement me
-	return false
+	if s == "" {
+		return false
+	}
+	rest := s
+	if strings.HasPrefix(s, "+") {
+		rest = s[1:]
+	}
+	if rest == "" {
+		return false
+	}
+	digits := 0
+	for _, r := range rest {
+		if r == '-' {
+			continue
+		}
+		if r < '0' || r > '9' {
+			return false
+		}
+		digits++
+	}
+	return digits >= 10 && digits <= 15
 }
